@@ -33,6 +33,16 @@ public class DatabaseConnection {
             pstmt.setString(2, password);
             ResultSet rs = pstmt.executeQuery();
             
+            if(rs.next()){
+                String role = rs.getString("role");
+                if(role.equalsIgnoreCase("admin")){
+                    new adminDashboard().setVisible(true);
+                    
+                }else{
+                    new librarianDashboard().setVisible(true);
+                    }
+            }
+            
             return rs.next();
         }catch(SQLException e){
             System.out.println("Login Failed" + e.getMessage());

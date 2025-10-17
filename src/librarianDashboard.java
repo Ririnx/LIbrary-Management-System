@@ -1,5 +1,6 @@
 
 import java.awt.CardLayout;
+import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
 /*
@@ -21,6 +22,8 @@ public class librarianDashboard extends javax.swing.JFrame {
         CardLayout cl = (CardLayout) (contentpanel.getLayout());
         contentpanel.add(contentpanel1, "Frame1");
         contentpanel.add(contentpanel2, "Frame2");
+        contentpanel.add(contentpanel3, "Frame3");
+        contentpanel.add(contentpanel4, "Frame4");
         
         cl.show(contentpanel, "Frame1");
         
@@ -53,11 +56,11 @@ public class librarianDashboard extends javax.swing.JFrame {
         nameLabel = new javax.swing.JLabel();
         jPanel4 = new javax.swing.JPanel();
         jPanel2 = new javax.swing.JPanel();
-        librarianButton = new javax.swing.JButton();
+        attendanceButton = new javax.swing.JButton();
         booksButton = new javax.swing.JButton();
         logoutButton = new javax.swing.JButton();
-        tableButton1 = new javax.swing.JButton();
-        tableButton2 = new javax.swing.JButton();
+        borrowreturnButton = new javax.swing.JButton();
+        reservingButton = new javax.swing.JButton();
         jPanel5 = new javax.swing.JPanel();
         jLabel2 = new javax.swing.JLabel();
         contentpanel = new javax.swing.JPanel();
@@ -66,10 +69,10 @@ public class librarianDashboard extends javax.swing.JFrame {
         dashboardTable = new javax.swing.JTable();
         jPanel7 = new javax.swing.JPanel();
         contentpanel1 = new javax.swing.JPanel();
-        jPanel6 = new javax.swing.JPanel();
-        panelName = new javax.swing.JLabel();
+        jSplitPane1 = new javax.swing.JSplitPane();
         contentpanel3 = new javax.swing.JPanel();
         contentpanel4 = new javax.swing.JPanel();
+        jPanel6 = new javax.swing.JPanel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -130,16 +133,16 @@ public class librarianDashboard extends javax.swing.JFrame {
 
         jPanel2.setBackground(new java.awt.Color(33, 53, 85));
 
-        librarianButton.setFont(new java.awt.Font("Yu Gothic UI Semibold", 0, 12)); // NOI18N
-        librarianButton.setText("Manage Librarian");
-        librarianButton.addActionListener(new java.awt.event.ActionListener() {
+        attendanceButton.setFont(new java.awt.Font("Yu Gothic UI Semibold", 0, 12)); // NOI18N
+        attendanceButton.setText("Attendance");
+        attendanceButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                librarianButtonActionPerformed(evt);
+                attendanceButtonActionPerformed(evt);
             }
         });
 
         booksButton.setFont(new java.awt.Font("Yu Gothic UI Semibold", 0, 12)); // NOI18N
-        booksButton.setText("Manage Books");
+        booksButton.setText("Books");
         booksButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 booksButtonActionPerformed(evt);
@@ -154,19 +157,19 @@ public class librarianDashboard extends javax.swing.JFrame {
             }
         });
 
-        tableButton1.setFont(new java.awt.Font("Yu Gothic UI Semibold", 0, 12)); // NOI18N
-        tableButton1.setText("Manage Policies");
-        tableButton1.addActionListener(new java.awt.event.ActionListener() {
+        borrowreturnButton.setFont(new java.awt.Font("Yu Gothic UI Semibold", 0, 12)); // NOI18N
+        borrowreturnButton.setText("Borrowing | Returning");
+        borrowreturnButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                tableButton1ActionPerformed(evt);
+                borrowreturnButtonActionPerformed(evt);
             }
         });
 
-        tableButton2.setFont(new java.awt.Font("Yu Gothic UI Semibold", 0, 12)); // NOI18N
-        tableButton2.setText("Reports & Logs");
-        tableButton2.addActionListener(new java.awt.event.ActionListener() {
+        reservingButton.setFont(new java.awt.Font("Yu Gothic UI Semibold", 0, 12)); // NOI18N
+        reservingButton.setText("Reserving Books");
+        reservingButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                tableButton2ActionPerformed(evt);
+                reservingButtonActionPerformed(evt);
             }
         });
 
@@ -178,7 +181,7 @@ public class librarianDashboard extends javax.swing.JFrame {
             jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel5Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 138, Short.MAX_VALUE)
+                .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addContainerGap())
         );
         jPanel5Layout.setVerticalGroup(
@@ -201,11 +204,10 @@ public class librarianDashboard extends javax.swing.JFrame {
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                     .addComponent(jPanel5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                        .addComponent(librarianButton, javax.swing.GroupLayout.DEFAULT_SIZE, 150, Short.MAX_VALUE)
-                        .addComponent(booksButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(tableButton1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(tableButton2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                    .addComponent(attendanceButton, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(booksButton, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(borrowreturnButton, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(reservingButton, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel2Layout.setVerticalGroup(
@@ -214,13 +216,13 @@ public class librarianDashboard extends javax.swing.JFrame {
                 .addGap(17, 17, 17)
                 .addComponent(jPanel5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(29, 29, 29)
-                .addComponent(librarianButton, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(attendanceButton, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(36, 36, 36)
                 .addComponent(booksButton, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(36, 36, 36)
-                .addComponent(tableButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(borrowreturnButton, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(38, 38, 38)
-                .addComponent(tableButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(reservingButton, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(logoutButton)
                 .addContainerGap())
@@ -281,40 +283,21 @@ public class librarianDashboard extends javax.swing.JFrame {
 
         contentpanel1.setBackground(new java.awt.Color(0, 51, 51));
 
-        jPanel6.setBackground(new java.awt.Color(0, 102, 102));
-
-        panelName.setBackground(new java.awt.Color(216, 196, 182));
-        panelName.setFont(new java.awt.Font("SansSerif", 0, 12)); // NOI18N
-        panelName.setForeground(new java.awt.Color(23, 49, 62));
-        panelName.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        panelName.setText("Real Time Status");
-
-        javax.swing.GroupLayout jPanel6Layout = new javax.swing.GroupLayout(jPanel6);
-        jPanel6.setLayout(jPanel6Layout);
-        jPanel6Layout.setHorizontalGroup(
-            jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(panelName, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 1003, Short.MAX_VALUE)
-        );
-        jPanel6Layout.setVerticalGroup(
-            jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(panelName, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 37, Short.MAX_VALUE)
-        );
-
         javax.swing.GroupLayout contentpanel1Layout = new javax.swing.GroupLayout(contentpanel1);
         contentpanel1.setLayout(contentpanel1Layout);
         contentpanel1Layout.setHorizontalGroup(
             contentpanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(contentpanel1Layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jPanel6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, contentpanel1Layout.createSequentialGroup()
+                .addContainerGap(318, Short.MAX_VALUE)
+                .addComponent(jSplitPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 477, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(220, 220, 220))
         );
         contentpanel1Layout.setVerticalGroup(
             contentpanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(contentpanel1Layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jPanel6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(642, Short.MAX_VALUE))
+                .addGap(34, 34, 34)
+                .addComponent(jSplitPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 266, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(385, Short.MAX_VALUE))
         );
 
         contentpanel.add(contentpanel1, "card2");
@@ -332,15 +315,28 @@ public class librarianDashboard extends javax.swing.JFrame {
 
         contentpanel.add(contentpanel3, "card4");
 
+        jPanel6.setBackground(new java.awt.Color(204, 255, 204));
+
+        javax.swing.GroupLayout jPanel6Layout = new javax.swing.GroupLayout(jPanel6);
+        jPanel6.setLayout(jPanel6Layout);
+        jPanel6Layout.setHorizontalGroup(
+            jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 1015, Short.MAX_VALUE)
+        );
+        jPanel6Layout.setVerticalGroup(
+            jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 685, Short.MAX_VALUE)
+        );
+
         javax.swing.GroupLayout contentpanel4Layout = new javax.swing.GroupLayout(contentpanel4);
         contentpanel4.setLayout(contentpanel4Layout);
         contentpanel4Layout.setHorizontalGroup(
             contentpanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 1015, Short.MAX_VALUE)
+            .addComponent(jPanel6, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         contentpanel4Layout.setVerticalGroup(
             contentpanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 685, Short.MAX_VALUE)
+            .addComponent(jPanel6, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
 
         contentpanel.add(contentpanel4, "card5");
@@ -394,11 +390,10 @@ public class librarianDashboard extends javax.swing.JFrame {
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
-    private void librarianButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_librarianButtonActionPerformed
+    private void attendanceButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_attendanceButtonActionPerformed
         CardLayout cl = (CardLayout)(contentpanel.getLayout());
         cl.show(contentpanel, "Frame1");
-        panelName.setText("About You");
-    }//GEN-LAST:event_librarianButtonActionPerformed
+    }//GEN-LAST:event_attendanceButtonActionPerformed
 
     private void booksButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_booksButtonActionPerformed
         CardLayout cl = (CardLayout)(contentpanel.getLayout());
@@ -406,17 +401,31 @@ public class librarianDashboard extends javax.swing.JFrame {
     }//GEN-LAST:event_booksButtonActionPerformed
 
     private void logoutButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_logoutButtonActionPerformed
-        this.dispose();
-        new loginMenu().setVisible(true);
+        int choice = JOptionPane.showConfirmDialog(
+            this,
+            "Are you sure you want to log out?",
+            "Confirm Logout",
+            JOptionPane.YES_NO_OPTION,
+            JOptionPane.QUESTION_MESSAGE
+        );
+        
+        if(choice == JOptionPane.YES_OPTION){
+            this.dispose();
+            new loginMenu().setVisible(true);
+        }
+        
+        
     }//GEN-LAST:event_logoutButtonActionPerformed
 
-    private void tableButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tableButton1ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_tableButton1ActionPerformed
+    private void borrowreturnButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_borrowreturnButtonActionPerformed
+        CardLayout cl = (CardLayout)(contentpanel.getLayout());
+        cl.show(contentpanel, "Frame3");
+    }//GEN-LAST:event_borrowreturnButtonActionPerformed
 
-    private void tableButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tableButton2ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_tableButton2ActionPerformed
+    private void reservingButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_reservingButtonActionPerformed
+        CardLayout cl = (CardLayout)(contentpanel.getLayout());
+        cl.show(contentpanel, "Frame4");
+    }//GEN-LAST:event_reservingButtonActionPerformed
 
     /**
      * @param args the command line arguments
@@ -454,7 +463,9 @@ public class librarianDashboard extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton attendanceButton;
     private javax.swing.JButton booksButton;
+    private javax.swing.JButton borrowreturnButton;
     private javax.swing.JPanel contentpanel;
     private javax.swing.JPanel contentpanel1;
     private javax.swing.JPanel contentpanel2;
@@ -471,12 +482,10 @@ public class librarianDashboard extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel6;
     private javax.swing.JPanel jPanel7;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JButton librarianButton;
+    private javax.swing.JSplitPane jSplitPane1;
     private javax.swing.JButton logoutButton;
     public javax.swing.JLabel nameLabel;
-    private javax.swing.JLabel panelName;
-    private javax.swing.JButton tableButton1;
-    private javax.swing.JButton tableButton2;
+    private javax.swing.JButton reservingButton;
     private javax.swing.JPanel userField;
     // End of variables declaration//GEN-END:variables
 }
