@@ -1,4 +1,3 @@
-
 import java.awt.event.ActionEvent;
 import javax.swing.JOptionPane;
 
@@ -20,6 +19,8 @@ public class loginMenu extends javax.swing.JFrame {
         initComponents();
         setLocationRelativeTo(null);
         new DatabaseConnection().connect();
+        userName.addActionListener(e  -> confirmButtonActionPerformed(e));
+        userPassword.addActionListener(e  -> confirmButtonActionPerformed(e));
     }
 
     /**
@@ -123,12 +124,6 @@ public class loginMenu extends javax.swing.JFrame {
 
         jPanel8.setBackground(new java.awt.Color(216, 196, 182));
 
-        userName.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                userNameActionPerformed(evt);
-            }
-        });
-
         javax.swing.GroupLayout jPanel8Layout = new javax.swing.GroupLayout(jPanel8);
         jPanel8.setLayout(jPanel8Layout);
         jPanel8Layout.setHorizontalGroup(
@@ -147,12 +142,6 @@ public class loginMenu extends javax.swing.JFrame {
         );
 
         jPanel9.setBackground(new java.awt.Color(216, 196, 182));
-
-        userPassword.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                userPasswordActionPerformed(evt);
-            }
-        });
 
         javax.swing.GroupLayout jPanel9Layout = new javax.swing.GroupLayout(jPanel9);
         jPanel9.setLayout(jPanel9Layout);
@@ -345,42 +334,12 @@ public class loginMenu extends javax.swing.JFrame {
     private void confirmButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_confirmButtonActionPerformed
         String username = userName.getText();
         String password = userPassword.getText();
-        boolean isAuthenticated = new DatabaseConnection().login(username, password);
-                
-        if (isAuthenticated){
-            JOptionPane.showMessageDialog(this, "Login Success");
-            this.dispose();
-        } else {
-            JOptionPane.showMessageDialog(this, "Login Failed");
+        boolean isAuthenticated = new DatabaseConnection().login(username, password ,this);
+        
+        if(!isAuthenticated){
+            JOptionPane.showMessageDialog(this, "Login failed");
         }
-            
     }//GEN-LAST:event_confirmButtonActionPerformed
-
-    private void userNameActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_userNameActionPerformed
-        String username = userName.getText();
-        String password = userPassword.getText();
-        boolean isAuthenticated = new DatabaseConnection().login(username, password);
-                
-        if (isAuthenticated){
-            JOptionPane.showMessageDialog(this, "Login Success");
-            this.dispose();
-        } else {
-            JOptionPane.showMessageDialog(this, "Login Failed");
-        } 
-    }//GEN-LAST:event_userNameActionPerformed
-
-    private void userPasswordActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_userPasswordActionPerformed
-        String username = userName.getText();
-        String password = userPassword.getText();
-        boolean isAuthenticated = new DatabaseConnection().login(username, password);
-                
-        if (isAuthenticated){
-            JOptionPane.showMessageDialog(this, "Login Success");
-            this.dispose();
-        } else {
-            JOptionPane.showMessageDialog(this, "Login Failed");
-        }
-    }//GEN-LAST:event_userPasswordActionPerformed
 
     private void clearButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_clearButtonActionPerformed
         userName.setText("");        // TODO add your handling code here:

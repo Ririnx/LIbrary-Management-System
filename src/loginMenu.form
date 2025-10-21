@@ -322,9 +322,6 @@
                   </Layout>
                   <SubComponents>
                     <Component class="javax.swing.JTextField" name="userName">
-                      <Events>
-                        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="userNameActionPerformed"/>
-                      </Events>
                     </Component>
                   </SubComponents>
                 </Container>
@@ -357,9 +354,6 @@
                   </Layout>
                   <SubComponents>
                     <Component class="javax.swing.JPasswordField" name="userPassword">
-                      <Events>
-                        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="userPasswordActionPerformed"/>
-                      </Events>
                     </Component>
                   </SubComponents>
                 </Container>
