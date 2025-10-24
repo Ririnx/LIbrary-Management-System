@@ -55,6 +55,8 @@ public class DatabaseConnection {
                     loginFrame.dispose();
                     new librarianDashboard(rs.getString("name")).setVisible(true);
                     }
+            }else{
+                JOptionPane.showMessageDialog(loginFrame, "Login Failed");
             }
             
             return rs.next();
@@ -98,14 +100,47 @@ public class DatabaseConnection {
         }
     }
     
+    public void fetchAllLibrarian(JTable table){
+        String query = "SELECT * FROM librarians";
+        DefaultTableModel librarianModel = new DefaultTableModel();
+        librarianModel.addColumn("Librarian ID");
+        librarianModel.addColumn("Username");
+        librarianModel.addColumn("Full Name");
+        librarianModel.addColumn("Password");
+        librarianModel.addColumn("Role");
+        
+        try (Connection conn = connect();
+            Statement stmt = conn.createStatement()){
+            
+            ResultSet rs = stmt.executeQuery(query);
+            
+            while(rs.next()){
+                int id = rs.getInt("id");
+                String username = rs.getString("username");
+                String name = rs.getString("name");
+                String password = rs.getString("password");
+                String role = rs.getString("role");
+
+                Object[] row = {id, username, name, password, role};
+                
+                librarianModel.addRow(row);
+            }
+            
+            table.setModel(librarianModel);
+            
+        }catch(SQLException e){
+            e.printStackTrace();
+        }
+    }
+    
     public static void insertAttendance(int userId, String action) {
-        String sql = "INSERT INTO attendance (user_id, action, timestamp) VALUES (?, ?, ?)";
+        String query = "INSERT INTO attendance (user_id, action, timestamp) VALUES (?, ?, ?)";
 
         LocalDateTime now = LocalDateTime.now();
         String formattedNow = now.format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss"));
 
         try (Connection conn = connect();
-             PreparedStatement pstmt = conn.prepareStatement(sql)) {
+             PreparedStatement pstmt = conn.prepareStatement(query)) {
 
             pstmt.setInt(1, userId);
             pstmt.setString(2, action); // "IN" or "OUT"
@@ -121,11 +156,11 @@ public class DatabaseConnection {
 
     // Retrieve all attendance records
     public static void getAttendanceRecords() {
-        String sql = "SELECT * FROM attendance";
+        String query = "SELECT * FROM attendance";
 
         try (Connection conn = connect();
              Statement stmt = conn.createStatement();
-             ResultSet rs = stmt.executeQuery(sql)) {
+             ResultSet rs = stmt.executeQuery(query)) {
 
             while (rs.next()) {
                 System.out.println(
@@ -139,5 +174,262 @@ public class DatabaseConnection {
         } catch (SQLException e) {
             System.out.println(e.getMessage());
         }
+    }
+    
+    
+    
+    public static void addBooks(String title, String author, String category, int quantity){
+        String query = "INSERT INTO books (book_name, book_author, book_categories, book_quantity) VALUES (?, ?, ?, ?)";
+        
+        try (Connection conn = connect();
+            PreparedStatement pstmt = conn.prepareStatement(query)){
+            
+            pstmt.setString(1, title);
+            pstmt.setString(2, author);
+            pstmt.setString(3, category);
+            pstmt.setInt(4, quantity);
+            
+            pstmt.executeUpdate();
+            
+        }catch(SQLException e){
+            System.out.println("Error adding books." + e.getMessage());
+        }
+    }
+    
+    public static void updateBooks(int quantity, int id){
+        String query = "UPDATE books SET book_quantity = ? WHERE book_id = ?";
+        
+        try (Connection conn = connect();
+            PreparedStatement pstmt = conn.prepareStatement(query)){
+            
+            pstmt.setInt(1, quantity);
+            pstmt.setInt(2, id);
+            
+            int rowsUpdate = pstmt.executeUpdate();
+            
+            if(rowsUpdate > 0){
+                System.out.println("Updated Successfully");
+            }else{
+                System.out.println("Update Failed");
+            }
+            
+        }catch(SQLException e){
+            System.out.println("Error adding books." + e.getMessage());
+        }
+    }
+    
+    public static void deleteBooks(int id){
+        String query = "DELETE FROM books where book_id = ?";
+        
+        try(Connection conn = connect();
+            PreparedStatement pstmt = conn.prepareStatement(query)){
+            
+            pstmt.setInt(1, id);
+            
+            int rowsDelete = pstmt.executeUpdate();
+            
+            if(rowsDelete > 0){
+                JOptionPane.showMessageDialog(null, "Book deleted successfully");
+            }else{
+                JOptionPane.showMessageDialog(null, "No books found with that ID");
+            }
+            
+        }catch(SQLException e){
+            JOptionPane.showMessageDialog(null, "Error deleting books." + e.getMessage());
+        }
+    }
+    
+    public static void addLibrarian(String username, String fullname, String password, String role){
+        String query = "INSERT INTO librarians (username, name, password, role) VALUES (?, ?, ?, ?)";
+        String query1 = "INSERT INTO users (username, name, password, role) VALUES (?, ?, ?, ?)";
+        
+        try (Connection conn = connect();
+            PreparedStatement pstmt = conn.prepareStatement(query);
+            PreparedStatement pstmt1 = conn.prepareStatement(query1);){
+            
+            pstmt.setString(1, username);
+            pstmt.setString(2, fullname);
+            pstmt.setString(3, password);
+            pstmt.setString(4, role);
+            
+            pstmt.executeUpdate();
+            
+            pstmt1.setString(1, username);
+            pstmt1.setString(2, fullname);
+            pstmt1.setString(3, password);
+            pstmt1.setString(4, role);
+            
+            pstmt1.executeUpdate();
+            
+        }catch(SQLException e){
+            System.out.println("Error creating account." + e.getMessage());
+        }
+    }
+    
+    public static void updateLibrarian(String password, String username, int id){
+        String query = "UPDATE librarians SET username = ?, password = ? WHERE id = ?";
+        
+        try (Connection conn = connect();
+            PreparedStatement pstmt = conn.prepareStatement(query)){
+            
+            pstmt.setString(1, username);
+            pstmt.setString(2, password);
+            pstmt.setInt(3, id);
+            
+            int rowsUpdate = pstmt.executeUpdate();
+            
+            if(rowsUpdate > 0){
+                System.out.println("Updated Successfully");
+            }else{
+                System.out.println("Update Failed");
+            }
+            
+        }catch(SQLException e){
+            System.out.println("Error updating librarian." + e.getMessage());
+        }
+    }
+    
+    public static void deleteLibrarian(int id){
+        String query = "DELETE FROM librarians where id = ?";
+        
+        try(Connection conn = connect();
+            PreparedStatement pstmt = conn.prepareStatement(query);){
+                
+            pstmt.setInt(1, id);
+            
+            int rowsRemove = pstmt.executeUpdate();
+            
+            if(rowsRemove > 0){
+                JOptionPane.showMessageDialog(null, "Librarian removed successfully");
+            }else{
+                JOptionPane.showMessageDialog(null, "No librarian found with that ID");
+            }    
+        }catch(SQLException e){
+            JOptionPane.showMessageDialog(null, "Error removing librarian." + e.getMessage()); 
+        }
+    }
+        
+    public static void searchBooks(JTable table, String keyword){
+        DefaultTableModel searchModel = (DefaultTableModel) table.getModel();
+        searchModel.setRowCount(0);
+        
+        try (Connection conn = connect();
+            PreparedStatement pstmt = conn.prepareStatement(
+                "SELECT * FROM books WHERE " + "book_name LIKE ? OR book_author LIKE ? OR book_categories LIKE ?")){
+            
+            String searchFunction = "%" + keyword.trim() + "%";
+            pstmt.setString(1, searchFunction);
+            pstmt.setString(2, searchFunction);
+            pstmt.setString(3, searchFunction);
+            
+            ResultSet rs = pstmt.executeQuery();
+            boolean found = false;
+            
+            while (rs.next()){
+                found = true;
+                searchModel.addRow(new Object[]{
+                    rs.getInt("book_id"),
+                    rs.getString("book_name"),
+                    rs.getString("book_author"),
+                    rs.getString("book_categories"),
+                    rs.getInt("book_quantity")
+                });
+            }
+            
+            if (!found) {
+                searchModel.addRow(new Object[]{"", "Nothing found", "", "", ""});
+            }
+                    
+        }catch(SQLException e){
+            e.printStackTrace();
+        }
+    }
+    
+    public static void searchLibrarian(JTable table, String keyword){
+        DefaultTableModel searchModel = (DefaultTableModel) table.getModel();
+        searchModel.setRowCount(0);
+        
+        try (Connection conn = connect();
+            PreparedStatement pstmt = conn.prepareStatement(
+                "SELECT * FROM librarians WHERE " + "username LIKE ? OR name LIKE ?")){
+            
+            String searchFunction = "%" + keyword.trim() + "%";
+            pstmt.setString(1, searchFunction);
+            pstmt.setString(2, searchFunction);
+            
+            ResultSet rs = pstmt.executeQuery();
+            boolean found = false;
+            
+            while (rs.next()){
+                found = true;
+                searchModel.addRow(new Object[]{
+                    rs.getInt("id"),
+                    rs.getString("username"),
+                    rs.getString("name"),
+                    rs.getString("password")
+                });
+            }
+            
+            if (!found) {
+                searchModel.addRow(new Object[]{"", "Nothing found", "", ""});
+            }
+                    
+        }catch(SQLException e){
+            e.printStackTrace();
+        }
+    }
+    
+    public static int bookTotal(){
+        String query = "SELECT COUNT(*) AS total FROM books";
+        int total = 0;
+        
+        try (Connection conn = connect();
+            Statement stmt = conn.createStatement();
+            ResultSet rs = stmt.executeQuery(query)){
+            
+            if(rs.next()){
+                total = rs.getInt("total");
+            }
+        }catch(SQLException e){
+            JOptionPane.showMessageDialog(null, "Error showing all books!" + e.getMessage());
+        }
+        
+        return total;
+    }
+    
+    public static int librarianTotal(){
+        String query = "SELECT COUNT(*) AS total FROM librarians";
+        int total = 0;
+        
+        try (Connection conn = connect();
+            Statement stmt = conn.createStatement();
+            ResultSet rs = stmt.executeQuery(query)){
+            
+            if(rs.next()){
+                total = rs.getInt("total");
+            }
+        }catch(SQLException e){
+            JOptionPane.showMessageDialog(null, "Error showing all librarian!" + e.getMessage());
+        }
+        
+        return total;
+    }
+    
+    public static int borrowedTotal(){
+        String query = "SELECT COUNT(*) AS total FROM [borrowed books]";
+        int total = 0;
+        
+        try (Connection conn = connect();
+            Statement stmt = conn.createStatement();
+            ResultSet rs = stmt.executeQuery(query)){
+            
+            if(rs.next()){
+                total = rs.getInt("total");
+            }
+        }catch(SQLException e){
+            JOptionPane.showMessageDialog(null, "Error showing all borrowed books!" + e.getMessage());
+        }
+        
+        return total;
     }
 }

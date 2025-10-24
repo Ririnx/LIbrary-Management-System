@@ -334,11 +334,7 @@ public class loginMenu extends javax.swing.JFrame {
     private void confirmButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_confirmButtonActionPerformed
         String username = userName.getText();
         String password = userPassword.getText();
-        boolean isAuthenticated = new DatabaseConnection().login(username, password ,this);
-        
-        if(!isAuthenticated){
-            JOptionPane.showMessageDialog(this, "Login failed");
-        }
+        boolean isAuthenticated = new DatabaseConnection().login(username, password ,this); 
     }//GEN-LAST:event_confirmButtonActionPerformed
 
     private void clearButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_clearButtonActionPerformed

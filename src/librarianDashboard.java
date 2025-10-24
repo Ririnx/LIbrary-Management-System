@@ -95,16 +95,16 @@ public class librarianDashboard extends javax.swing.JFrame {
 
         borrowFrame.setSize(new java.awt.Dimension(500, 453));
 
-        jPanel11.setBackground(new java.awt.Color(153, 153, 255));
+        jPanel11.setBackground(new java.awt.Color(51, 51, 51));
         jPanel11.setMaximumSize(new java.awt.Dimension(500, 600));
         jPanel11.setPreferredSize(new java.awt.Dimension(500, 453));
 
         jLabel1.setFont(new java.awt.Font("SansSerif", 1, 24)); // NOI18N
-        jLabel1.setForeground(new java.awt.Color(0, 0, 0));
         jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel1.setText("BORROW BOOKS");
 
         jPanel13.setBackground(new java.awt.Color(204, 204, 204));
+        jPanel13.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0), 3));
 
         jLabel4.setForeground(new java.awt.Color(51, 51, 51));
         jLabel4.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
@@ -176,7 +176,7 @@ public class librarianDashboard extends javax.swing.JFrame {
         jPanel11Layout.setHorizontalGroup(
             jPanel11Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel11Layout.createSequentialGroup()
-                .addContainerGap(143, Short.MAX_VALUE)
+                .addContainerGap(144, Short.MAX_VALUE)
                 .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 210, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(147, 147, 147))
             .addGroup(jPanel11Layout.createSequentialGroup()
@@ -198,7 +198,7 @@ public class librarianDashboard extends javax.swing.JFrame {
         borrowFrame.getContentPane().setLayout(borrowFrameLayout);
         borrowFrameLayout.setHorizontalGroup(
             borrowFrameLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel11, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(jPanel11, javax.swing.GroupLayout.DEFAULT_SIZE, 501, Short.MAX_VALUE)
         );
         borrowFrameLayout.setVerticalGroup(
             borrowFrameLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -207,16 +207,17 @@ public class librarianDashboard extends javax.swing.JFrame {
 
         returnFrame.setSize(new java.awt.Dimension(500, 453));
 
-        jPanel14.setBackground(new java.awt.Color(153, 153, 255));
+        jPanel14.setBackground(new java.awt.Color(51, 51, 51));
         jPanel14.setMaximumSize(new java.awt.Dimension(500, 600));
         jPanel14.setPreferredSize(new java.awt.Dimension(500, 453));
 
+        jLabel7.setBackground(new java.awt.Color(204, 204, 204));
         jLabel7.setFont(new java.awt.Font("SansSerif", 1, 24)); // NOI18N
-        jLabel7.setForeground(new java.awt.Color(0, 0, 0));
         jLabel7.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel7.setText("RETURN BOOKS");
 
         jPanel15.setBackground(new java.awt.Color(204, 204, 204));
+        jPanel15.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0), 3));
 
         jLabel8.setForeground(new java.awt.Color(51, 51, 51));
         jLabel8.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
@@ -495,7 +496,7 @@ public class librarianDashboard extends javax.swing.JFrame {
         jPanel12.setLayout(jPanel12Layout);
         jPanel12Layout.setHorizontalGroup(
             jPanel12Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(librarianTitle, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 309, Short.MAX_VALUE)
+            .addComponent(librarianTitle, javax.swing.GroupLayout.PREFERRED_SIZE, 109, javax.swing.GroupLayout.PREFERRED_SIZE)
         );
         jPanel12Layout.setVerticalGroup(
             jPanel12Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -525,7 +526,7 @@ public class librarianDashboard extends javax.swing.JFrame {
             .addGroup(jPanel7Layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jPanel12, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
+                .addGap(30, 30, 30)
                 .addComponent(borrowButton)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(returnButton)
@@ -644,7 +645,7 @@ public class librarianDashboard extends javax.swing.JFrame {
             .addGroup(contentpanel1Layout.createSequentialGroup()
                 .addGap(150, 150, 150)
                 .addComponent(jPanel8, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(143, Short.MAX_VALUE))
+                .addContainerGap(147, Short.MAX_VALUE))
         );
         contentpanel1Layout.setVerticalGroup(
             contentpanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
